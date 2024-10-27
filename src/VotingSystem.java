@@ -50,6 +50,11 @@ public class VotingSystem {
         inputKandidat(scanner, votingSystem);//extract method
         prosesVoting(scanner, votingSystem);//extract method
 
+        System.out.print("Masukkan nomor kandidat yang ingin dihapus: ");
+        int nomerKandidat = scanner.nextInt();
+        votingSystem.removeCandidat(nomerKandidat);
+
+
         votingSystem.tampilkanHasil();
         votingSystem.saveResults();
 
@@ -86,6 +91,16 @@ public class VotingSystem {
             System.out.print("Masukkan nama kandidat ke-" + (i + 1) + ": ");
             String namaKandidat = scanner.nextLine();
             votingSystem.addCandidat(i + 1, namaKandidat);
+        }
+    }
+
+    public void removeCandidat(int nomer) {
+        if (getKandidat().containsKey(nomer)) {
+            String nama = getKandidat().remove(nomer);
+            getVoteCount().remove(nama);
+            System.out.println("Kandidat " + nama + " berhasil dihapus.");
+        } else {
+            System.out.println("Nomor kandidat tidak ditemukan.");
         }
     }
 
